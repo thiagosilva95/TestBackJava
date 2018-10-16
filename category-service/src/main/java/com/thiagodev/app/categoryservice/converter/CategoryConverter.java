@@ -10,7 +10,7 @@ public class CategoryConverter {
 	
 	public static CategoryDTO toDTO(final Category model) {
 		final CategoryDTO dto = new CategoryDTO();
-		dto.setCode(model.getId());
+		dto.setId(model.getId());
 		dto.setDescription(model.getDescription());
 		return dto;
 	}
