@@ -1,4 +1,4 @@
-package com.thiagodev.app.categoryservice.repository;
+package com.thiagodev.app.categoryservice.repository.redis;
 
 import java.util.List;
 

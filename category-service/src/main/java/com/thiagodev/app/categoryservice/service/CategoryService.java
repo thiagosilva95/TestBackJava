@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.thiagodev.app.categoryservice.exception.CategoryNotFoundException;
 import com.thiagodev.app.categoryservice.model.Category;
 import com.thiagodev.app.categoryservice.repository.CategoryRepository;
-import com.thiagodev.app.categoryservice.repository.CategoryRepositoryRedis;
+import com.thiagodev.app.categoryservice.repository.redis.CategoryRepositoryRedis;
 
 @Service
 public class CategoryService {

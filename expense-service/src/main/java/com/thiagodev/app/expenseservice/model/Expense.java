@@ -22,8 +22,8 @@ public class Expense implements Serializable {
 	private static final long serialVersionUID = -8507622473380945770L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_expense")
-	@SequenceGenerator(name = "sequence_expense", sequenceName = "sequence_expense")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "sequence_expense")
+	@SequenceGenerator(name = "sequence_expense", sequenceName = "seq_expense")
 	@Column(name = "id_expense", precision = 12, scale = 0)
 	private Long id;
 
