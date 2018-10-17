@@ -1,4 +1,4 @@
-package com.thiagodev.app.categoryservice.model;
+package com.thiagodev.app.categoryservice.domain;
 
 import java.io.Serializable;
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.thiagodev.app.categoryservice.model.Category;
+import com.thiagodev.app.categoryservice.domain.Category;
 import com.thiagodev.app.categoryservice.support.RedisKeysHelper;
 
 @Repository

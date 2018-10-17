@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.thiagodev.app.categoryservice.controller.dto.CategoryDTO;
-import com.thiagodev.app.categoryservice.model.Category;
+import com.thiagodev.app.categoryservice.domain.Category;
 
 public class CategoryConverter {
 	
