@@ -12,6 +12,12 @@ import org.springframework.util.Base64Utils;
 import com.thiagodev.app.categoryservice.exception.ManagedRedisException;
 
 public class RedisKeysHelper {
+	
+	private static final String CATEGORIES_KEY_PARTNER = "categories:%s";
+	
+	public static String generateCategoriesKey(final Long category) {
+		return String.format(CATEGORIES_KEY_PARTNER, category);
+	}
 
 	public static String deserializableToString(final Serializable object) {
 		try {

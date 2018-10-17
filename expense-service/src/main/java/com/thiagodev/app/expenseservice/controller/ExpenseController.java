@@ -1,5 +1,7 @@
 package com.thiagodev.app.expenseservice.controller;
 
+import java.time.LocalDateTime;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.thiagodev.app.expenseservice.controller.dto.CategoryDTO;
 import com.thiagodev.app.expenseservice.controller.dto.ExpenseDTO;
+import com.thiagodev.app.expenseservice.controller.dto.ExpenseFilterDTO;
 import com.thiagodev.app.expenseservice.converter.ExpenseConverter;
 import com.thiagodev.app.expenseservice.model.Expense;
 import com.thiagodev.app.expenseservice.service.ExpenseService;
@@ -30,7 +33,7 @@ public class ExpenseController {
 	@PostMapping("/api/v1/expenses")
 	public ResponseEntity<ExpenseDTO> insert(@Valid @RequestBody final ExpenseDTO dto){
 		final ExpenseDTO result= ExpenseConverter.toDTO(expenseService.insert(ExpenseConverter.fromDTO(dto)));
-		return new ResponseEntity<ExpenseDTO>(result, HttpStatus.OK);
+		return new ResponseEntity<ExpenseDTO>(result, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/api/v1/expenses")
@@ -39,13 +42,14 @@ public class ExpenseController {
 		return new ResponseEntity<ExpenseDTO>(result, HttpStatus.OK);
 	}
 	
-	@PutMapping("/api/v1/expenses/{idExpense}/category")
-	public ResponseEntity<ExpenseDTO> update(@PathVariable final Long idExpense, @RequestBody final CategoryDTO categoryDTO){
-		final ExpenseDTO result = ExpenseConverter.toDTO(expenseService.updateCategory(idExpense, categoryDTO));
+	@GetMapping("/api/v1/expenses/{id}")
+	public ResponseEntity<ExpenseDTO> findById(@PathVariable final Long id){
+		final Expense page = expenseService.findById(id);
+		final ExpenseDTO result = ExpenseConverter.toDTO(page);
 		return new ResponseEntity<ExpenseDTO>(result, HttpStatus.OK);
 	}
 
-	@GetMapping("/api/v1/expenses/{userCode}")
+	@GetMapping("/api/v1/expenses/user/{userCode}")
 	public ResponseEntity<Page<ExpenseDTO>> findExpensesByUserCode(@PathVariable final Long userCode, final Pageable pageable){
 		final Page<Expense> page = expenseService.findExpensesByUserId(userCode, pageable);
 		final Page<ExpenseDTO> result=  new PageImpl<>(ExpenseConverter.toListDTO(page.getContent()), page.getPageable(), page.getTotalElements());
@@ -53,8 +57,8 @@ public class ExpenseController {
 	}
 
 	@GetMapping("/api/v1/expenses")
-	public ResponseEntity<Page<ExpenseDTO>> findExpensesByFilter(final ExpenseDTO dto, final Pageable pageable){
-		final Page<Expense> page = expenseService.findExpensesByFilter(dto.getDate(), dto.getUserCode(), pageable);
+	public ResponseEntity<Page<ExpenseDTO>> findExpensesByFilter(ExpenseFilterDTO filter, final Pageable pageable){
+		final Page<Expense> page = expenseService.findExpensesByFilter(filter.getDate(), filter.getUserCode(), pageable);
 		final Page<ExpenseDTO> result=  new PageImpl<>(ExpenseConverter.toListDTO(page.getContent()), page.getPageable(), page.getTotalElements());
 		return new ResponseEntity<Page<ExpenseDTO>>(result, HttpStatus.OK);
 	}

@@ -1,5 +1,7 @@
 package com.thiagodev.app.expenseservice.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -51,15 +53,26 @@ public class ExpenseService {
 
 	@Transactional
 	public Expense insert(final Expense expense) {
-		expense.setCategory(categorizeExpenses(expense.getDescription()));
+		if (expense.getCategory() == null) {
+			expense.setCategory(categorizeExpenses(expense.getDescription()));	
+		}
 		return expenseRepository.save(expense);
 	}
 
 	@Transactional
 	public Expense update(final Expense expense) {
-		expense.setCategory(categorizeExpenses(expense.getDescription()));
 		validateLockOptimistic(expense);
 		return expenseRepository.save(expense);
+	}
+	
+	public Expense findById(Long id) {
+		Optional<Expense> expenseOptional = expenseRepository.findById(id);
+		
+		if (expenseOptional.isPresent()) {
+			return expenseOptional.get();
+		} else {
+			throw new ExpenseNotFoundException("Expense with code " + id + "  not found!");
+		}
 	}
 
 	public Page<Expense> findExpensesByUserId(final Long userCode, final Pageable pageable) {
@@ -71,9 +84,9 @@ public class ExpenseService {
 		return new PageImpl<>(expenses.getContent(), pageable, expenses.getTotalElements());
 	}
 
-	public Page<Expense> findExpensesByFilter(final LocalDateTime date, final Long userCode, final Pageable pageable) {
-		final Page<Expense> expenses = expenseRepository.findByUserIdAndExpenseDateBetween(userCode,
-				getLocalDateTimeStartTime(date), getLocalDateEndTime(date), pageable);
+	public Page<Expense> findExpensesByFilter(final LocalDate date, final Long userCode, final Pageable pageable) {
+		final Page<Expense> expenses = expenseRepository.findByUserIdAndExpenseDateEquals(userCode,
+				Date.valueOf(date), pageable);
 		if (expenses.getContent().isEmpty()) {
 			throw new ExpenseNotFoundException(
 					"Expenses not found for user with code: " + userCode + " and date: " + date);
@@ -83,14 +96,11 @@ public class ExpenseService {
 
 	@Transactional
 	public Category categorizeExpenses(final String description) {
-		Category category;
 		Optional<Expense> expenseOptional = findExpenseCategoryzedByDescription(description);
-		if (!expenseOptional.isPresent()) {
-			category = new Category();
-			category.setDescription(description);
-			return categoryRepositoryRedis.insert(categoryRepository.save(category));
+		if (expenseOptional.isPresent()) {
+			return expenseOptional.get().getCategory();
 		}
-		return expenseOptional.get().getCategory();
+		return null;
 	}
 
 	private Optional<Expense> findExpenseCategoryzedByDescription(String description) {
@@ -117,26 +127,13 @@ public class ExpenseService {
 	public static LocalDateTime getLocalDateEndTime(final LocalDateTime expenseDate) {
 		return LocalDateTime.of(expenseDate.getYear(), expenseDate.getMonth(), expenseDate.getDayOfMonth(), HOURS_23, MINUTES_59, SECOND_59);
 	}
-
-	public Expense updateCategory(Long idExpense, CategoryDTO categoryDTO) {
-		Optional<Expense> expenseOptional = expenseRepository.findById(idExpense);
-		
-		if (expenseOptional.isPresent()) {
-			Expense expense = expenseOptional.get();
-			
-			expense.setCategory(getCategoryById(categoryDTO.getId()));
-			
-			return expenseRepository.save(expense);
-		} else {
-			throw new ExpenseNotFoundException("Expense with code " + idExpense + "  not found!");
-		}
-	}
 	
-	private Category getCategoryById(final Long id) {
+	/*private Category getCategoryById(final Long id) {
 		CategoryDTO response = categoryProxy.findCategoryById(id);
 		
 		logger.info("{}", response);
 		
 		return new Category(response.getId(), response.getDescription());
-	}
+	}*/
+	
 }

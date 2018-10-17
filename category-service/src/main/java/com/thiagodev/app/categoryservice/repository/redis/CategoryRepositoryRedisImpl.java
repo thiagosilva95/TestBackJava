@@ -18,6 +18,13 @@ public class CategoryRepositoryRedisImpl implements CategoryRepositoryRedis {
 	private RedisTemplate<String, String> redisTemplate;
 
 	@Override
+	public Category insert(final Category category) {
+		final String categoryKey = RedisKeysHelper.generateCategoriesKey(category.getId());
+		redisTemplate.opsForValue().set(categoryKey, RedisKeysHelper.deserializableToString(category));
+		return RedisKeysHelper.serializableToObject(redisTemplate.opsForValue().get(categoryKey), Category.class);
+	}
+	
+	@Override
 	public List<Category> findCategorySuggestionByDescription(final String description) {
 		final List<String> listJson= redisTemplate.opsForValue().multiGet(redisTemplate.keys("categories:*"));
 		final List<Category> listCategory= listJson.stream().map(json -> RedisKeysHelper.serializableToObject(json, Category.class)).collect(Collectors.toList());

@@ -20,6 +20,10 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepositoryRedis categoryRepositoryRedis;
 	
+	public Category insert(Category category) {
+		return categoryRepositoryRedis.insert(categoryRepository.save(category));
+	}
+	
 	public List<Category> findCategorySuggestionByDescription(String description) {
 		List<Category> listCategories = categoryRepositoryRedis.findCategorySuggestionByDescription(description);
 		if(listCategories.isEmpty()) {

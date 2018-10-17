@@ -7,6 +7,8 @@ import com.thiagodev.app.categoryservice.model.Category;
 
 public interface CategoryRepositoryRedis {
 	
+	Category insert(Category category);
+	
 	List<Category> findCategorySuggestionByDescription(String description);
 
 	Optional<Category> findById(Long id);
