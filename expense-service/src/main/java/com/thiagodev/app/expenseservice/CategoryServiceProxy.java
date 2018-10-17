@@ -11,8 +11,9 @@ import com.thiagodev.app.expenseservice.controller.dto.CategoryDTO;
 @RibbonClient(name = "category-service")
 public interface CategoryServiceProxy {
 
-	//@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
 	@GetMapping("/category-service/api/v1/categories/{description}")
-	public CategoryDTO retrieveExchangeValue(@PathVariable("description") String description);
+	public CategoryDTO findCategorySuggestionByDescription(@PathVariable("description") String description);
 
+	@GetMapping("/category-service/api/v1/categories/{id}")
+	public CategoryDTO findCategoryById(@PathVariable("id") Long id);
 }

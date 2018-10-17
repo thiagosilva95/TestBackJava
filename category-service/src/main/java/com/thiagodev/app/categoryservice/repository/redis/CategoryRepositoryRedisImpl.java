@@ -1,6 +1,7 @@
 package com.thiagodev.app.categoryservice.repository.redis;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,20 @@ public class CategoryRepositoryRedisImpl implements CategoryRepositoryRedis {
 		final List<String> listJson= redisTemplate.opsForValue().multiGet(redisTemplate.keys("categories:*"));
 		final List<Category> listCategory= listJson.stream().map(json -> RedisKeysHelper.serializableToObject(json, Category.class)).collect(Collectors.toList());
 		return listCategory.stream().filter(obj -> obj.getDescription().contains(description)).collect(Collectors.toList());
+	}
+
+	@Override
+	public Optional<Category> findById(Long id) {
+		final List<String> listJson= redisTemplate.opsForValue().multiGet(redisTemplate.keys("categories:*"));
+		final List<Category> listCategory= listJson.stream().map(json -> RedisKeysHelper.serializableToObject(json, Category.class)).collect(Collectors.toList());
+		Optional<Category> findFirst = listCategory.stream().filter(obj -> obj.getId().equals(id)).findFirst();
+		return findFirst;
+		
+	}
+	
+	public Optional<Category> findByDescription(String description) {
+		final List<String> listJson= redisTemplate.opsForValue().multiGet(redisTemplate.keys("categories:*"));
+		final List<Category> listCategory= listJson.stream().map(json -> RedisKeysHelper.serializableToObject(json, Category.class)).collect(Collectors.toList());
+		return listCategory.stream().filter(obj -> obj.getDescription().contains(description)).findFirst();
 	}
 }

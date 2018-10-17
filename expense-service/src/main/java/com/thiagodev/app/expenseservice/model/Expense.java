@@ -26,6 +26,9 @@ public class Expense implements Serializable {
 	@SequenceGenerator(name = "sequence_expense", sequenceName = "seq_expense")
 	@Column(name = "id_expense", precision = 12, scale = 0)
 	private Long id;
+	
+	@Column(nullable = false, length = 200)
+	private String description;
 
 	@Column(nullable = false)
 	private double value;

@@ -1,5 +1,7 @@
 package com.thiagodev.app.expenseservice.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thiagodev.app.expenseservice.controller.dto.CategoryDTO;
 import com.thiagodev.app.expenseservice.controller.dto.ExpenseDTO;
 import com.thiagodev.app.expenseservice.converter.ExpenseConverter;
 import com.thiagodev.app.expenseservice.model.Expense;
@@ -25,14 +28,20 @@ public class ExpenseController {
 	private ExpenseService expenseService;
 
 	@PostMapping("/api/v1/expenses")
-	public ResponseEntity<ExpenseDTO> insert(@RequestBody final ExpenseDTO dto){
+	public ResponseEntity<ExpenseDTO> insert(@Valid @RequestBody final ExpenseDTO dto){
 		final ExpenseDTO result= ExpenseConverter.toDTO(expenseService.insert(ExpenseConverter.fromDTO(dto)));
 		return new ResponseEntity<ExpenseDTO>(result, HttpStatus.OK);
 	}
 
 	@PutMapping("/api/v1/expenses")
-	public ResponseEntity<ExpenseDTO> update(@RequestBody final ExpenseDTO dto){
+	public ResponseEntity<ExpenseDTO> update(@Valid @RequestBody final ExpenseDTO dto){
 		final ExpenseDTO result = ExpenseConverter.toDTO(expenseService.update(ExpenseConverter.fromDTO(dto)));
+		return new ResponseEntity<ExpenseDTO>(result, HttpStatus.OK);
+	}
+	
+	@PutMapping("/api/v1/expenses/{idExpense}/category")
+	public ResponseEntity<ExpenseDTO> update(@PathVariable final Long idExpense, @RequestBody final CategoryDTO categoryDTO){
+		final ExpenseDTO result = ExpenseConverter.toDTO(expenseService.updateCategory(idExpense, categoryDTO));
 		return new ResponseEntity<ExpenseDTO>(result, HttpStatus.OK);
 	}
 

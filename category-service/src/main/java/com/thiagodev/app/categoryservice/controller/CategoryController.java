@@ -19,10 +19,16 @@ public class CategoryController {
 	@Autowired
 	private CategoryService service;
 
-	@GetMapping("/api/v1/categories/{description}")
-	public ResponseEntity<List<CategoryDTO>> findCategorySuggestionByDescription(@PathVariable final String description){
+	@GetMapping("/api/v1/categories")
+	public ResponseEntity<List<CategoryDTO>> findCategorySuggestionByDescription(final String description){
 		final List<CategoryDTO> result = CategoryConverter.toListDTO(service.findCategorySuggestionByDescription(description));
 		return new ResponseEntity<List<CategoryDTO>>(result, HttpStatus.OK);
+	}
+	
+	@GetMapping("/api/v1/categories/{id}")
+	public ResponseEntity<CategoryDTO> findCategoryById(@PathVariable final Long id){
+		final CategoryDTO result = CategoryConverter.toDTO(service.findCategoryById(id));
+		return new ResponseEntity<CategoryDTO>(result, HttpStatus.OK);
 	}
 
 }
