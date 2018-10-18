@@ -11,6 +11,30 @@ https://github.com/MicrosoftArchive/redis/releases
 
 na pasta raiz do Redis executar o comando: redis-server redis.windows.conf
 
+
+#### Mysql
+    Persistencia da compras realizadas
+	
+#### Redis
+	Armazenamento de estrutura de dados de chave-valor de código aberto e na memória.
+	
+	*Justificativa:* Evitam atrasos de tempo de busca e podem acessar dados com algoritmos mais simples que usam menos instruções de CPU
+	
+#### Server config
+	Centralizar os arquivos de configuração dos microserviços
+	
+#### Eureka
+    É um serviço desevolvolvido pela Netflix para **service discovery**.
+
+    *Justificativa:* O uso do Zuul, para criar os cluster
+
+#### Zuul
+    É um proxy reverso também desevolvolvido pela Netflix que atua também como um **load balance**, trabalha junto com o Eureka para descoberta e agreção dos nós. Dando a possibilidad de criar um cluster
+    com facilidade.
+    
+    *Justificativa:* O sistema terá um volume de 100k de request/seg, dessa forma o sistema terá que está em cluster com um loadbalance.
+
+
 ### Para executar os projetos:
 mvn clean install
 
