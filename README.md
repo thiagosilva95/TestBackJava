@@ -8,6 +8,7 @@ https://redis.io/download
 
 ### Caso use o sistema operacional Windows:
 https://github.com/MicrosoftArchive/redis/releases
+
 na pasta raiz do Redis executar o comando: redis-server redis.windows.conf
 
 ### Para executar os projetos:
@@ -17,16 +18,20 @@ mvn spring-boot:run
 
 Subir os projetos na seguinte ordem:
 1 - spring-cloud-config-server
+
 2 - netflix-eureka-naming-service
+
 3 - netflix-zuul-api-gateway-server
+
 4 - category-service
+
 5 - expense-service
 
 ### Endpoints
 
 Para 
 
-![01-inserir-categoria](img/01-inserir-categoria.png)
+![01-inserir-categoria](img\01-inserir-categoria.png)
 
 
 ---------------------------------------------------------
