@@ -29,7 +29,7 @@ public class CategoryMother {
 
 	public static CategoryDTO getCategoryDTOPattern() {
 		final CategoryDTO category = new CategoryDTO();
-		category.setCode(1L);
+		category.setId(1L);
 		category.setDescription(DESCRIPTION_DTO_TEST);
 		return category;
 	}
