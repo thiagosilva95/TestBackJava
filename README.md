@@ -31,7 +31,7 @@ Subir os projetos na seguinte ordem:
 
 Para 
 
-![01-inserir-categoria](img\01-inserir-categoria.png)
+![01-inserir-categoria](01-inserir-categoria.png)
 
 
 ---------------------------------------------------------
