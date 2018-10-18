@@ -17,6 +17,7 @@ mvn clean install
 mvn spring-boot:run
 
 Subir os projetos na seguinte ordem:
+
 1 - spring-cloud-config-server
 
 2 - netflix-eureka-naming-service
@@ -29,9 +30,9 @@ Subir os projetos na seguinte ordem:
 
 ### Endpoints
 
-Para 
+Para inserir uma nova categoria
 
-![01-inserir-categoria](01-inserir-categoria.png)
+![01-inserir-categoria](img/01-inserir-categoria.png)
 
 
 ---------------------------------------------------------
