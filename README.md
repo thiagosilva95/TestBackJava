@@ -32,7 +32,7 @@ Subir os projetos na seguinte ordem:
 
 Para inserir uma nova categoria
 
-![01-inserir-categoria](img/01-inserir-categoria.png)
+![01-inserir-categoria](img/01-inserir-categoria.PNG)
 
 
 ---------------------------------------------------------
