@@ -40,15 +40,15 @@ Para buscar categorias sugeridas pelo nome
 
 Para inserir gasto informando a categoria
 
-![03-inserir-gasto com-categoria](img/03-inserir-gasto com-categoria.PNG)
+![03-inserir-gasto-com-categoria](img/03-inserir-gasto-com-categoria.PNG)
 
 Para inserir gasto sem informar categoria e receber automaticamente conforme existir relação com outra já inserida anteriormente
 
-![04-inserir-gasto sem-categoria-categorizando-automaticamente](img/04-inserir-gasto sem-categoria-categorizando-automaticamente.PNG)
+![04-inserir-gasto-sem-categoria-categorizando-automaticamente](img/04-inserir-gasto-sem-categoria-categorizando-automaticamente.PNG)
 
 Para inserir gasto sem informar categoria
 
-![05-inserindo-gasto sem-categoria](img/05-inserindo-gasto sem-categoria.PNG)
+![05-inserindo-gasto-sem-categoria](img/05-inserindo-gasto-sem-categoria.PNG)
 
 Para atualizar gasto já cadastrado, informado uma categoria
 
@@ -64,7 +64,7 @@ Para filtrar gastos de um usuário em determinada data
 
 Para listar gastos de determinado usuário nos últimos 5 segundos
 
-![09-listar-gastos-do-usuario nos-ultimos-cinco-segundos](img/09-listar-gastos-do-usuario nos-ultimos-cinco-segundos.PNG)
+![09-listar-gastos-do-usuario-nos-ultimos-cinco-segundos](img/09-listar-gastos-do-usuario-nos-ultimos-cinco-segundos.PNG)
 
 ---------------------------------------------------------
 # Show me the code
