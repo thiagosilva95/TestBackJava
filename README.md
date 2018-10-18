@@ -1,3 +1,35 @@
+# Empresa recrutadora: Rersouce It
+
+### Para baixar o MySQL
+https://dev.mysql.com/downloads/
+
+### Para baixar o Redis: 
+https://redis.io/download
+
+### Caso use o sistema operacional Windows:
+https://github.com/MicrosoftArchive/redis/releases
+na pasta raiz do Redis executar o comando: redis-server redis.windows.conf
+
+### Para executar os projetos:
+mvn clean install
+
+mvn spring-boot:run
+
+Subir os projetos na seguinte ordem:
+1 - spring-cloud-config-server
+2 - netflix-eureka-naming-service
+3 - netflix-zuul-api-gateway-server
+4 - category-service
+5 - expense-service
+
+### Endpoints
+
+Para 
+
+![01-inserir-categoria](img/01-inserir-categoria.png)
+
+
+---------------------------------------------------------
 # Show me the code
 
 ### # DESAFIO:
