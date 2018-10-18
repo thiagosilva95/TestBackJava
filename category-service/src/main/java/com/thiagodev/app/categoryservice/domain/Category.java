@@ -9,15 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category implements Serializable {
 
-	private static final long serialVersionUID = -448760385229721893L;
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+//	private static final long serialVersionUID = -448760385229721893L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
